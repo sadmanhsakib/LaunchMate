@@ -33,7 +33,7 @@ def main():
         today_counter = 1
     
     # running the functions to open the sites and log the event
-    #open_sites()
+    open_sites()
     log_event(lifetime_counter, today_counter)
 
 
