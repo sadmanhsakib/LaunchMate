@@ -39,16 +39,20 @@ def main():
 
 def open():
     # for opening the websites
-    url_list = os.getenv("URLS").split(',')
+    url_list = os.getenv("URLS")
     
-    for url in url_list:
-        webbrowser.open(url)
+    # checking for empty list
+    if url_list != None:
+        for url in url_list.split(','):
+            webbrowser.open(url)
 
     # for opening the applications through their shortcuts
-    app_list = os.getenv("SHORTCUTS").split(',')
+    app_list = os.getenv("SHORTCUTS")
     
-    for app in app_list:
-        os.startfile(app)
+    # checking for empty list
+    if url_list != None:
+        for app in app_list.split(','):
+            os.startfile(app)
 
 
 def log_event(lifetime_counter, today_counter):
