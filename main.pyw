@@ -33,19 +33,21 @@ def main():
         today_counter = 1
     
     # running the functions to open the sites and log the event
-    open_sites()
+    open()
     log_event(lifetime_counter, today_counter)
 
 
-def open_sites():
+def open():
     # for opening the websites
-    urls = os.getenv("URLS")
-    for url in urls.split(','):
+    url_list = os.getenv("URLS").split(',')
+    
+    for url in url_list:
         webbrowser.open(url)
 
     # for opening the applications through their shortcuts
-    apps = os.getenv("SHORTCUTS")
-    for app in apps.split(','):
+    app_list = os.getenv("SHORTCUTS").split(',')
+    
+    for app in app_list:
         os.startfile(app)
 
 
