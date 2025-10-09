@@ -5,34 +5,37 @@ from dotenv import load_dotenv
 
 load_dotenv(".env")
 
-counter = 0
+lifetime_counter = 0
 today_counter = 0
 
 # creating a new log file if there is no log file
-if not (os.path.exists("log.txt")):
+if not (os.path.exists("log.csv")):
     # creates a new log file
-    with open("log.txt", 'w') as file:
-        # writing the initial lines
-        file.write(f"Number of times Opened Lifetime = {counter}\n")
-        file.write(f"Number of times Opened Today = {today_counter}\n")
-        
-log_file = "log.txt"
+    with open("log.csv", 'w') as file:
+        # writing the header
+        file.write("Lifetime-Counter,Today-Counter,Date,Time")
+
+log_file = "log.csv"
+
 
 def main():
-    with open(log_file, 'r') as file:
-        # getting the counter values
-        lines = file.readlines()
-        counter = lines[0].replace("Number of times Opened Lifetime = ", "")
-        today_counter = lines[1].replace("Number of times Opened Today = ", "")
-
-    # adjusting the counter values
-    counter = int(counter)
-    counter += 1
-    today_counter = int(today_counter)
-    today_counter += 1
+    try:
+        with open(log_file, 'r') as file:
+            # getting the counter values
+            lines = file.readlines()
+            parts = lines[-1].split(',')
+            lifetime_counter = int(parts[0])
+            today_counter = int(parts[1])
+            
+    # handling the case when the log file is empty
+    except ValueError:
+        lifetime_counter = 1
+        today_counter = 1
     
-    open_sites()
-    log_event(counter, today_counter)
+    # running the functions to open the sites and log the event
+    #open_sites()
+    log_event(lifetime_counter, today_counter)
+
 
 def open_sites():
     # for opening the websites
@@ -45,47 +48,41 @@ def open_sites():
     for app in apps.split(','):
         os.startfile(app)
 
-def log_event(counter, today_counter):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # reseting the today counter if it's a new day
-    today_counter = is_new_day(today_counter)
-
+def log_event(lifetime_counter, today_counter):
+    # getting the current date and time
+    current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+    
+    # updating the counter values before logging
+    lifetime_counter += 1
+    
+    if is_new_day():
+        today_counter = 1
+    else:
+        today_counter += 1
+    
     # logging the current run time in log file
     with open(log_file, 'a') as file:
-        file.write(f"{today_counter}. {now}\n")
+        file.write(f"\n{lifetime_counter},{today_counter},{current_date},{current_time}")
 
-    # opening the log file in read mode and storing the lines in a list
-    with open(log_file, 'r') as old_file:
-        lines = old_file.readlines()
-    os.remove(log_file)
 
-    # updating the initial lines with recent value
-    lines[0] = lines[0].replace(f"{lines[0]}", f"Number of times Opened Lifetime = {counter}\n")
-    lines[1] = lines[1].replace(f"{lines[1]}", f"Number of times Opened Today = {today_counter}\n")
-
-    # creating a new log file and writing down the lines
-    with open(log_file, 'w') as new_file:
-        new_file.writelines(lines)
-
-def is_new_day(today_counter):
-    today = datetime.datetime.today().strftime("%Y-%m-%d")
+def is_new_day():
+    isNewDay = False
     
     with open(log_file, 'r') as file:
+        # getting the information from the log file
         lines = file.readlines()
-        # getting the last line of the log file
-        last_line = lines[-1]
-    # creates a list of words that was in that string
-    parts = last_line.split()
-
-    # index 1 word is the date, comparing it with today's date
-    if today != parts[1]:
-        # opening the file to add a new line
-        with open(log_file, 'a') as file:
-            file.write("[New Day]\n")
-        # resetting the today_counter back to zero
-        today_counter = 1
-    return today_counter
-
-
-main()
+        parts = lines[-1].split(',')
+        last_date = parts[2]
+        
+        # getting today's date
+        today = datetime.datetime.now().strftime("%Y-%m-%d")
+        
+        if last_date != today:
+            isNewDay = True
+            
+        return isNewDay
+    
+if __name__ == "__main__":
+    main()
