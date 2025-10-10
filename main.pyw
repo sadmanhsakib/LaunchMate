@@ -1,6 +1,7 @@
 import webbrowser
 import os
 import datetime
+import subprocess
 from dotenv import load_dotenv
 
 load_dotenv(".env")
@@ -33,11 +34,11 @@ def main():
         today_counter = 1
     
     # running the functions to open the sites and log the event
-    open()
+    open_items()
     log_event(lifetime_counter, today_counter)
 
 
-def open():
+def open_items():
     # for opening the websites
     url_list = os.getenv("URLS")
     
@@ -50,9 +51,9 @@ def open():
     app_list = os.getenv("SHORTCUTS")
     
     # checking for empty list
-    if url_list != None:
+    if app_list != None:
         for app in app_list.split(','):
-            os.startfile(app)
+            subprocess.run(["explorer", app])
 
 
 def log_event(lifetime_counter, today_counter):

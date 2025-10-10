@@ -9,7 +9,7 @@ The user has to add the URLs and shortcuts as mentioned later. The script at fir
 1. Clone the GitHub repository.<br>
 2. Create a ".env" file in the same directory and open it. <br>
 3. Write: URLS=. Add the paths inside the double inverted commas. Be sure to separate the paths with a comma(,) in between and ensure that there are no whitespaces. <br>
-4. On the next line in the ".env" folder, write: SHORTCUTS=. Add the paths that you want to delete every week in here.<br>
+4. On the next line in the ".env" folder, write: SHORTCUTS=. Add the paths of the shortcuts that you want to open in here. Be sure to include the extension i.e.(.lnk)<br>
 5. If you don't want to add any url or shortcut, don't add anything. Just keep it like this: URLS/SHORTCUTS=
 6. Open the Task Scheduler. (If you are not using Windows, please follow the instructions for your operating system.)<br>
 7. Create a new task for the script. (Trigger can be whatever the user wants. Personally, I set the trigger to "At log on". Then, repeat this task every 4 hours indefinitely.)<br>
