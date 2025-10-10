@@ -1,5 +1,6 @@
 import webbrowser
 import os
+import sys
 import datetime
 import subprocess
 from dotenv import load_dotenv
@@ -39,6 +40,8 @@ def main():
 
 
 def open_items():
+    system = sys.platform
+    
     # for opening the websites
     url_list = os.getenv("URLS")
     
@@ -52,9 +55,13 @@ def open_items():
     
     # checking for empty list
     if app_list != None:
-        for app in app_list.split(','):
-            subprocess.run(["explorer", app])
-
+        # checking for various operating systems
+        if system == "win32":
+            for app in app_list.split(','):
+                subprocess.run(["explorer", app])
+        elif system == "darwin":
+            for app in app_list.split(','):
+                subprocess.run(["open", app])
 
 def log_event(lifetime_counter, today_counter):
     # getting the current date and time
