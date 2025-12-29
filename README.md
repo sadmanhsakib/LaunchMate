@@ -1,3 +1,6 @@
+> **⚠️ ARCHIVED PROJECT**  
+> This project is archived and now part of my [Automation-Toolbox](https://github.com/sadmanhsakib/Automation-Toolbox) repository.
+
 # LaunchMate
 
 **LaunchMate** is a smart automation script designed to streamline your daily workflow by automatically launching your essential websites and applications. It features intelligent frequency control to prevent redundant launches and maintains a detailed usage log.
@@ -102,5 +105,3 @@ Lifetime-Counter,Today-Counter,Date,Time
 ## 🤝 Contributing
 
 This project is solely developed and maintained by **[Sadman Sakib](https://github.com/sadmanhsakib)**.
-
-If you have suggestions or find bugs, please feel free to open an issue or submit a Pull Request.
