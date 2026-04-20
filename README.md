@@ -1,16 +1,16 @@
 > **⚠️ ARCHIVED PROJECT**  
 > This project is archived and now part of my [Automation-Toolbox](https://github.com/sadmanhsakib/Automation-Toolbox) repository.
 
-# LaunchMate
+# mass-launcher
 
-**LaunchMate** is a smart automation script designed to streamline your daily workflow by automatically launching your essential websites and applications. It features intelligent frequency control to prevent redundant launches and maintains a detailed usage log.
+**mass-launcher** is a smart automation script designed to streamline your daily workflow by automatically launching your essential websites and applications. It features intelligent frequency control to prevent redundant launches and maintains a detailed usage log.
 
 ## 🚀 Purpose & Problem Solving
 
-In a daily routine, manually opening the same set of websites (news, email, project boards) and applications (IDEs, communication tools) can be repetitive and time-consuming. **LaunchMate** solves this by:
+In a daily routine, manually opening the same set of websites (news, email, project boards) and applications (IDEs, communication tools) can be repetitive and time-consuming. **mass-launcher** solves this by:
 
 1.  **Automating Routine**: Launches all your required tools with a single execution.
-2.  **Smart Frequency Control**: Unlike simple batch scripts, LaunchMate checks the last time it ran. If you accidentally trigger it or restart your computer shortly after the first run, it respects a configurable "cooldown" period (e.g., 4 hours) and won't open everything again.
+2.  **Smart Frequency Control**: Unlike simple batch scripts, mass-launcher checks the last time it ran. If you accidentally trigger it or restart your computer shortly after the first run, it respects a configurable "cooldown" period (e.g., 4 hours) and won't open everything again.
 3.  **Usage Tracking**: Keeps a local log (`log.csv`) of when and how often you use your setup, tracking both daily and lifetime usage.
 
 ## ✨ Core Features
@@ -25,8 +25,8 @@ In a daily routine, manually opening the same set of websites (news, email, proj
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/sadmanhsakib/LaunchMate.git
-    cd LaunchMate
+    git clone https://github.com/sadmanhsakib/mass-launcher.git
+    cd mass-launcher
     ```
 
 2.  **Install Dependencies**
@@ -66,7 +66,7 @@ To have this run automatically when you turn on your computer:
 For a more reliable startup experience than the Startup folder:
 1.  Press `Win + R`, type `taskschd.msc`, and press Enter.
 2.  In the right pane, click **Create Basic Task...**.
-3.  **Name**: "LaunchMate" (or your preferred name). Click Next.
+3.  **Name**: "mass-launcher" (or your preferred name). Click Next.
 4.  **Trigger**: Select **When I log on**. Click Next.
 5.  **Action**: Select **Start a program**. Click Next.
 6.  **Program/script**: Browse and select your `pythonw.exe` (usually in your Python installation folder) or simply select the `main.pyw` file if `.pyw` is associated with Python correctly.
@@ -78,16 +78,16 @@ Add the script to your **Login Items** in System Settings or use `automator` to 
 
 #### **Linux**
 You can use the `autostart` directory.
-1.  Create a `.desktop` file in `~/.config/autostart/` (e.g., `launchmate.desktop`).
+1.  Create a `.desktop` file in `~/.config/autostart/` (e.g., `mass-launcher.desktop`).
 2.  Add the following content (adjust paths as needed):
     ```ini
     [Desktop Entry]
     Type=Application
-    Exec=/usr/bin/python3 /path/to/your/LaunchMate/main.pyw
+    Exec=/usr/bin/python3 /path/to/your/mass-launcher/main.pyw
     Hidden=false
     NoDisplay=false
     X-GNOME-Autostart-enabled=true
-    Name=LaunchMate
+    Name=mass-launcher
     Comment=Start daily routine
     ```
 
